@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="颜如玉">
+  <rect x="6" y="6" width="52" height="52" rx="6" fill="#A8372A" />
+  <!-- C03 极度抽象：只取「颜」字笔意，不构成字形；跨尺寸辨识度优先 -->
+  <path d="M17 22 H46" stroke="#F3EADD" stroke-width="3.4" stroke-linecap="round" fill="none" />
+  <path d="M31 22 C31 32 27 40 19 47" stroke="#F3EADD" stroke-width="3.4" stroke-linecap="round" fill="none" />
+  <path d="M22 32 H43" stroke="#F3EADD" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.85" />
+  <path d="M37 31 C39 38 42 43 47 47" stroke="#F3EADD" stroke-width="2.6" stroke-linecap="round" fill="none" opacity="0.85" />
+</svg>

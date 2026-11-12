@@ -1,0 +1,151 @@
+{
+  "pavilions": [
+    {
+      "id": "shan-men",
+      "name": "山门",
+      "order": 0,
+      "role": "contact",
+      "position": [0, 0, 46],
+      "anchor": "gate",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "text": "你的行业里哪些活能被 AI 接走？我先做给你看，再谈合作。" },
+        { "type": "claim", "text": "不卖概念、不卖账号，交付的是能点开、能发给客户、能上线跑的东西。" }
+      ]
+    },
+    {
+      "id": "yanan-ge",
+      "name": "验案阁",
+      "order": 1,
+      "role": "proof",
+      "position": [-34, 10, 20],
+      "anchor": "door",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "title": "先看成品，再谈合作", "text": "场景拆解 → 技术实现 → 业务价值。看的是我怎么把一门生意拆成能点开的东西。" },
+        { "type": "caseRef", "ref": "case-house-tour" },
+        { "type": "caseRef", "ref": "case-xhs-game" },
+        {
+          "type": "caseSlot",
+          "slot": 3,
+          "status": "reserved",
+          "title": "待启之案",
+          "desc": "位置已留，成品上线即可点亮",
+          "items": [
+            { "label": "开发独立站", "desc": "品牌 / 门店独立站，从视觉到上线" },
+            { "label": "VoiceStudio AI 配音", "desc": "短视频旁白、产品讲解、多语种" },
+            { "label": "小游戏开发", "desc": "轻量互动，活动拉新与品牌传播" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tiangong-fang",
+      "name": "天工坊",
+      "order": 2,
+      "role": "solution",
+      "position": [30, 12, 8],
+      "anchor": "door",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "title": "AI 提效方案", "text": "下到你的现场，把重复劳动找出来，做成流程里跑得起来的东西，再交棒给你们团队。" },
+        {
+          "type": "steps",
+          "title": "合作路径",
+          "items": [
+            { "label": "看现场", "desc": "到业务里看一遍，哪些活真的在重复" },
+            { "label": "拆场景", "desc": "把模糊的「想用 AI」拆成具体可交付的一件事" },
+            { "label": "出 demo", "desc": "先做给你看，能点开、能给同事看" },
+            { "label": "上线", "desc": "接进现有流程，不是另开一套系统" },
+            { "label": "交棒", "desc": "文档、规则、培训齐备，你们自己能改" }
+          ]
+        },
+        { "type": "metric", "label": "同质化开发提效", "value": "约 70%", "desc": "已在商飞智能研发从 0 到 1 跑通，同样的人交付更多需求" }
+      ]
+    },
+    {
+      "id": "yinke-tai",
+      "name": "引客台",
+      "order": 3,
+      "role": "acquisition",
+      "position": [-22, 9, -28],
+      "anchor": "door",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "title": "获客 Web 工具", "text": "让客户自己点开就看懂，不用销售讲半天、不用加装软件。下列为可做的方向示例，尚未承诺已落地。" },
+        { "type": "toolRef", "title": "预设工具方向" }
+      ]
+    },
+    {
+      "id": "lingshu-dian",
+      "name": "灵枢殿",
+      "order": 4,
+      "role": "agent",
+      "position": [26, 14, -32],
+      "anchor": "door",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "title": "AGENT · 未启之境", "text": "企业级 AI 提效场景的投放区。云海里的台基已经打好，案例填进配置即点亮，不用重建这座山。" },
+        {
+          "type": "caseSlot",
+          "slot": 3,
+          "status": "reserved",
+          "title": "待填入的企业级场景",
+          "desc": "字段规范：场景拆解 / 技术实现 / 业务价值",
+          "items": [
+            { "label": "未启之境 · 壹", "desc": "台基已备，填入案例即点亮" },
+            { "label": "未启之境 · 贰", "desc": "台基已备，填入案例即点亮" },
+            { "label": "未启之境 · 叁", "desc": "台基已备，填入案例即点亮" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "guanxing-tai",
+      "name": "观星台",
+      "order": 5,
+      "role": "tech",
+      "position": [-5, 22, 11.5],
+      "anchor": "platform",
+      "sections": [
+        { "type": "claim", "title": "技术佐证", "text": "技术只放在佐证位：能跑起来的才算数。这里不谈技术选型，只放跑给你看的结果。" },
+        { "type": "evidenceRef", "title": "在线 demo 与项目截图", "desc": "" },
+        { "type": "metric", "label": "大规模拓扑可交互", "value": "5 万节点", "desc": "1 万节点稳定 60fps，大屏与工业拓扑不卡顿" }
+      ]
+    },
+    {
+      "id": "cangjing-ge",
+      "name": "藏经阁",
+      "order": 6,
+      "role": "resume",
+      "position": [-40, 6, -48],
+      "anchor": "door",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "title": "人生履历", "text": "十年一线工程底子，现在只做一件事：把技术翻译成生意里能用的东西。" },
+        {
+          "type": "resume",
+          "items": [
+            { "period": "起步", "label": "湖南大学", "desc": "科班出身，前端工程方向" },
+            { "period": "6 年", "label": "58 安居客", "desc": "复杂前端架构、低代码与虚拟滚动，扛过高流量业务" },
+            { "period": "随后", "label": "上飞 5G 创新中心", "desc": "工业侧数字化与三维可视化落地" },
+            { "period": "近期", "label": "商飞智能 · Web 研发负责人", "desc": "AI Coding 工程化体系从 0 到 1，规则库 / 知识库 / 门禁 / 度量 / 团队培训" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chuanshu-ting",
+      "name": "传书亭",
+      "order": 7,
+      "role": "contact",
+      "position": [44, 4, 44],
+      "anchor": "table",
+      "model": "lux3d_g1_36414.glb",
+      "sections": [
+        { "type": "claim", "title": "传书", "text": "说说你们行业里最耗人的那件重复活，我先给一个能点开的东西。" },
+        { "type": "cta", "text": "聊聊你们团队", "href": "mailto:{MAIL_TO_BE_FILLED}" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+/* [REF V06] 御剑侠客动画光标 —— 与 src/ui/SwordCursor.vue 配套
+ * 雪碧图：src/assets/cursor/swordsman-sheet.png（640×80，8 帧 ×80）
+ * 静态兜底在 base.css 的原生 cursor，本文件只在 JS 判定可用时由 body.has-sword-cursor 接管。
+ */
+
+body.has-sword-cursor,
+body.has-sword-cursor * {
+  cursor: none !important;
+}
+
+/* 输入框仍要有 I 形光标，否则无法定位插入点；当前工程无表单，先留好约定 */
+body.has-sword-cursor input,
+body.has-sword-cursor textarea,
+body.has-sword-cursor [contenteditable='true'] {
+  cursor: text !important;
+}
+
+.sword-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483000;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 0.18s ease;
+}
+
+.sword-cursor.is-visible { opacity: 1; }
+
+.sword-cursor__scale {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  /* 以剑尖为缩放原点：放大时热点不漂移 */
+  transform-origin: 72px 64px;
+  transform: scale(var(--sword-scale, 0.95));
+  transition: transform 0.16s ease;
+}
+
+.sword-cursor.is-interactive .sword-cursor__scale {
+  transform: scale(var(--sword-scale-hover, 1.064));
+}
+
+.sword-cursor.is-pressed .sword-cursor__scale {
+  transform: scale(var(--sword-scale-pressed, 0.893));
+}
+
+.sword-cursor__sprite {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 80px;
+  height: 80px;
+  background-image: url('../assets/cursor/swordsman-sheet.png');
+  background-repeat: no-repeat;
+  background-size: 640px 80px;
+  background-position: 0 0;
+  animation: sword-flight var(--sword-duration, 1200ms) steps(8, end) infinite;
+  /* 淡彩在深色 3D 山体 / 浅米宣纸上都容易被吞：一层月白提亮 + 一层极淡墨影分离轮廓 */
+  filter:
+    drop-shadow(0 0 1px rgba(248, 243, 226, 0.9))
+    drop-shadow(0 2px 2px rgba(51, 65, 60, 0.2));
+}
+
+@keyframes sword-flight {
+  from { background-position: 0 0; }
+  to { background-position: -640px 0; }
+}
+
+/* 悬停可点元素时，指尖淡金法术微微亮起（帧 7 本身也画了光点，这里只做氛围补光） */
+.sword-cursor__glow {
+  position: absolute;
+  top: 20px;
+  left: 46px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sword-glow, #f2d790) 0%, rgba(242, 215, 144, 0) 70%);
+  filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sword-cursor.is-interactive .sword-cursor__glow { opacity: 0.62; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sword-cursor__sprite {
+    animation: none;
+    background-position: 0 0;
+  }
+  .sword-cursor__scale { transition: none; }
+}

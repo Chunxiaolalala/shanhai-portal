@@ -1,0 +1,41 @@
+/* [REF V01] 色板取自 references/V01_moodboard/mood-master.png
+ * 取色方式：母版缩至 120px → 32 色中位切分量化 → 按色相分组求均值（5472×3072 原图）
+ * 母版实测：暖米宣纸底 #F0E5CA / #E6E2CB，青碧山体 #8EACA2 / #9CB5A8，月白高光 #F8F3E2 / #F3EEDC
+ * 注意：母版中朱砂像素极少（占比 <0.1%），--cinnabar 与 --ink 为规格书规范兜底值，
+ *       待 V10 印章参考 / 正文对比度标定后再改；不要当成「从图上取下来的色」。
+ */
+:root {
+  /* 纸 / 雾 */
+  --paper: #f0e5ca;
+  --paper-deep: #e6e2cb;
+  --moon: #f8f3e2;
+  --moon-soft: #e4e0ca;
+
+  /* 山 */
+  --jade: #8eaca2;
+  --jade-light: #aec0b1;
+  --jade-deep: #6e8f84;
+
+  /* 朱砂点题（规范值，非母版取色） */
+  --cinnabar: #a8372a;
+  --cinnabar-soft: #c25a49;
+
+  /* 墨（为满足正文对比度推导，非母版取色） */
+  --ink: #33413c;
+  --ink-soft: #5c6a63;
+
+  /* [REF V05][REF V08] 角色参考图取色（5 张水彩形象的不透明像素分组均值）
+   * 只用于角色光晕、图标描边、微交互高光；不改上面的全站主色板。
+   * 与 V01 母版同源：青绿 / 月白 / 朱砂，另带水彩特有的鹅黄与墨青。 */
+  --char-gold: #f2d790;
+  --char-jade: #9acbae;
+  --char-cinnabar: #e17e5b;
+  --char-ink: #3d4d42;
+  --char-paper: #fdfcf2;
+
+  --font-serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "STSong", serif;
+  --font-sans: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  /* 移动端用 dvh，避免 100vh 在浏览器工具栏收起时溢出 */
+  --stage-height: 100dvh;
+}

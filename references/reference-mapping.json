@@ -1,0 +1,559 @@
+{
+  "version": "v2.1",
+  "spec": "颜如玉OPC主页_开发规格书_v2.md 第 11 章",
+  "root": "references",
+  "convention": {
+    "naming": "小写英文 + 连字符 + 两位序号，如 mood-01.jpg；同一目录可放多张",
+    "formats": [
+      "jpg",
+      "png",
+      "webp",
+      "svg",
+      "gif",
+      "mp4"
+    ],
+    "status": {
+      "pending": "参考图未提供，消费点使用代码中兜底默认值",
+      "ready": "参考图已放入，人工标定后生效",
+      "decided": "非图片项，内容已定稿"
+    },
+    "rule": "放图后把该项 status 从 pending 改为 ready，不改组件代码；代码内注释格式见 README.md"
+  },
+  "items": [
+    {
+      "id": "V01",
+      "dir": "V01_moodboard",
+      "title": "全站色调与氛围",
+      "type": "image",
+      "priority": "P0",
+      "status": "ready",
+      "expect": "3-5 张山海 / 仙侠情绪板",
+      "naming": "mood-01.jpg ...",
+      "specHint": "建议 >= 1600px 长边，jpg/webp",
+      "consumedBy": [
+        {
+          "file": "src/styles/tokens.css",
+          "target": "--jade / --moon / --cinnabar / --gold / --ink 色值",
+          "note": "色板取色的唯一来源"
+        },
+        {
+          "file": "src/three/materials/fog.ts",
+          "target": "fogDensity / fogColor / ambientIntensity",
+          "note": "雾浓度与光照基调"
+        },
+        {
+          "file": "src/three/lighting/setup.ts",
+          "target": "keyLight / fillLight 色温",
+          "note": "柔和光，无强对比阴影"
+        },
+        {
+          "file": "public/og-image.png",
+          "target": "分享卡背景",
+          "note": "与 V10 印章合成"
+        }
+      ]
+    },
+    {
+      "id": "V02",
+      "dir": "V02_yan_glyph",
+      "title": "「颜」字笔势（极度抽象，仅开发看，不上线）",
+      "type": "image",
+      "priority": "P0",
+      "status": "ready",
+      "expect": "手写「颜」字，或偏好书法 / 碑帖截图；另可放一张笔势对照图",
+      "naming": "yan-handwrite.jpg, stroke-guide.png",
+      "specHint": "白底深墨，单字清晰",
+      "consumedBy": [
+        {
+          "file": "src/three/terrain/ridgeSpline.ts",
+          "target": "主峰山脊控制点",
+          "note": "只取「页」部一横一撇的走势，不做字形"
+        },
+        {
+          "file": "src/three/terrain/waterSpline.ts",
+          "target": "水脉三条曲线疏密",
+          "note": "借「彦」部三撇节奏"
+        },
+        {
+          "file": "src/ui/CompassMap.vue",
+          "target": "抽象笔势底图节点位置",
+          "note": "殿阁沿笔势节点分布，用户不被告知是字"
+        }
+      ]
+    },
+    {
+      "id": "V03",
+      "dir": "V03_kunlun_peak",
+      "title": "主峰 · 昆仑",
+      "type": "image",
+      "priority": "P0",
+      "status": "ready",
+      "expect": "山形参考，国画山 / 游戏场景均可，2-4 张",
+      "naming": "kunlun-01.jpg ...",
+      "specHint": "侧视与俯视各至少一张",
+      "consumedBy": [
+        {
+          "file": "src/three/terrain/mainPeak.ts",
+          "target": "高度分层 / 轮廓 / LOD 层级",
+          "note": "程序化地形，参考图只定形不定模"
+        },
+        {
+          "file": "src/three/camera/openingShot.ts",
+          "target": "开场镜头起止机位",
+          "note": "云雾散开后定格构图"
+        }
+      ]
+    },
+    {
+      "id": "V04",
+      "dir": "V04_pavilion_arch",
+      "title": "殿阁建筑",
+      "type": "image",
+      "priority": "P0",
+      "status": "pending",
+      "expect": "飞檐、斗拱、门窗、云阶的古建照片或游戏截图，3-6 张",
+      "naming": "pavilion-01.jpg, eave-detail.jpg, bracket-detail.jpg",
+      "specHint": "**Lux3D 图生 3D 的输入图**：单体、正交或三分之四视角、背景干净、无人物",
+      "consumedBy": [
+        {
+          "file": "tools/lux3d/batch.json",
+          "target": "imageTo3D 输入清单",
+          "note": "直接决定生成像不像，见规格书 3.3"
+        },
+        {
+          "file": "src/three/buildings/pavilionStyle.ts",
+          "target": "eave / bracket / 木构配色",
+          "note": "人工标定，参考图未提供时用兜底值"
+        },
+        {
+          "file": "src/config/pavilions.json",
+          "target": "各殿阁建筑变体引用",
+          "note": "assetId 关联 assets.json"
+        }
+      ]
+    },
+    {
+      "id": "V05",
+      "dir": "V05_shimei_character",
+      "title": "小师妹人设",
+      "type": "image",
+      "priority": "P0",
+      "status": "ready",
+      "expect": "立绘 / 三视图 / 参考角色，含发型、服饰、配色；表情差分可另放",
+      "naming": "shimei-front.source.jpg（用户原图）｜运行时 public/assets/characters/shimei.webp（脚本生成）",
+      "specHint": "Q 版 2D 水彩：黄绿衣裙 / 双丸子头叶饰 / 墨绿长发 / 指尖青绿法术旋涡；禁止 3D 渲染图",
+      "consumedBy": [
+        {
+          "file": "src/ui/GuideShimei.vue",
+          "target": "96px billboard 立绘 + 月白柔光",
+          "note": "按 pavilions.order 飞；被接管后停靠角落"
+        },
+        {
+          "file": "src/ui/CharacterImage.vue",
+          "target": "资产统一入口 / @error 内联 SVG 兜底"
+        },
+        {
+          "file": "src/styles/ornaments.css",
+          "target": ".shimei__body 柔光、反向倾斜、毕方伴飞"
+        },
+        {
+          "file": "src/styles/tokens.css",
+          "target": "--char-* 角色辅助色"
+        },
+        {
+          "file": "tools/images/prepare_characters.py",
+          "target": "边缘连通域去白底 / 输出透明 WebP（新源图已干净，shimei 的 erase_watermark 置 False）"
+        }
+      ],
+  "provided": [
+    {
+      "file": "shimei-front.source.jpg",
+      "note": "干净白底 JPEG（1920×1920），已无浅灰棋盘格、无水印；新姿态：双臂外展、指尖青绿法术旋涡、双丸子头叶饰"
+    }
+  ],
+      "runtimeAssets": [
+        "public/assets/characters/shimei.webp"
+      ],
+      "pending": "表情差分（引路 / 等待 / 乖巧退场）与三视图未提供；当前用同一张立绘 + CSS 姿态表达"
+    },
+    {
+      "id": "V06",
+      "dir": "V06_cursor_swordsman",
+      "title": "御剑侠客光标与法术拖尾",
+      "type": "image",
+      "priority": "P1",
+      "status": "ready",
+      "expect": "8 帧御剑飞行序列帧（含淡金指尖法术光带），已由 MiniMax H3 生成并去白底",
+      "naming": "ancient_swordsman_flight_sheet_transparent.png（八帧源图）｜运行时 src/assets/cursor/swordsman-*.png",
+      "specHint": "5472×3072 RGBA；8 帧沿 x 近似等距、沿 y 做「起-抬-最高-落-沉-最低-再起-回位」起伏，不能按 5472/8 等宽硬切。淡金光带已画进帧内，不再单独做 spellTrail",
+      "consumedBy": [
+        {
+          "file": "tools/images/prepare_cursor.py",
+          "target": "alpha 连通域切 8 帧 → 统一缩放 / 右边缘（剑尖）对齐 / 垂直烘焙 dy",
+          "note": "离线工具，换形象只替换 source 并重跑"
+        },
+        {
+          "file": "src/config/cursor.json",
+          "target": "frameCount / cell / sheetWidth / hotspot / durationMs / scale / hoverScale / trail",
+          "note": "几何字段由脚本生成，交互参数可手调"
+        },
+        {
+          "file": "src/ui/SwordCursor.vue",
+          "target": "rAF 跟随指针 + 8 帧循环 + hover / pressed / 失焦 / iframe 降级",
+          "note": "CSS cursor 不支持可靠动画，故 DOM 层 + 原生静态帧双层"
+        },
+        {
+          "file": "src/styles/cursor.css",
+          "target": "steps(8) sprite 动画、剑尖缩放原点、淡金柔光、reduced-motion 定格帧 1",
+          "note": "body.has-sword-cursor 时隐藏系统光标"
+        },
+        {
+          "file": "src/styles/base.css / src/styles/ornaments.css",
+          "target": "原生 CSS cursor 静态第 1 帧兜底",
+          "note": "无 JS / iframe / 粗指针 / 关闭动画时生效"
+        },
+        {
+          "file": "src/types/contract.ts → CursorConfig / CursorFrame",
+          "target": "光标配置的 TS 契约",
+          "note": "由 src/core/config.ts 统一读取"
+        }
+      ],
+      "provided": [
+        {
+          "file": "ancient_swordsman_flight_sheet_transparent.png",
+          "note": "★ 脚本实际输入：RGBA 已去白底，8 帧人物各自连同淡金光带构成独立连通域"
+        },
+        {
+          "file": "ancient_swordsman_flight_sheet.png",
+          "note": "白底原始出图，仅留档，不参与构建"
+        },
+        {
+          "file": "swordsman-cursor-request.json / bg-remove-args.json",
+          "note": "生图与去背请求记录，含临时签名 OSS 链接，已在 .gitignore 排除，勿提交"
+        },
+        {
+          "file": "cursor-preview.png",
+          "note": "脚本产出的 8 帧人工验收拼图（浅米底 + 帧号），不进构建"
+        }
+      ],
+      "runtimeAssets": [
+        "src/assets/cursor/swordsman-01..08.png",
+        "src/assets/cursor/swordsman-sheet.png",
+        "src/assets/cursor/swordsman-static.png"
+      ],
+      "knownLimit": "案例 iframe 是外链文档，其光标由对方页面控制，DOM 动画层覆盖不到；指针进入 iframe 时组件自动隐藏，回落到原生静态第 1 帧。src/assets/cursor-sword.svg 是 V06 之前的手写占位，现已无引用，保留作离线档。"
+    },
+    {
+      "id": "V07",
+      "dir": "V07_talisman_fx",
+      "title": "符箓 / 手诀 / 法术特效",
+      "type": "image",
+      "priority": "P1",
+      "status": "pending",
+      "expect": "参考动图或游戏录屏片段，2-4 段",
+      "naming": "seal-hand.gif, talisman-glow.gif",
+      "specHint": "短循环，透明背景优先",
+      "consumedBy": [
+        {
+          "file": "src/ui/fx/ClickFeedback.ts",
+          "target": "点击结印 / 符箓亮起",
+          "note": "替代通用 ripple"
+        },
+        {
+          "file": "src/ui/transition/InkScroll.vue",
+          "target": "墨迹晕染 + 符箓展开转场",
+          "note": "APPROACH -> SCROLL"
+        },
+        {
+          "file": "src/ui/CaseStone.vue",
+          "target": "空态未点亮符箓",
+          "note": "见 V11 / 规格书 7.2"
+        }
+      ]
+    },
+    {
+      "id": "V08",
+      "dir": "V08_beasts_2d",
+      "title": "山海经四兽（烛龙 / 精卫 / 毕方 / 鹿蜀）",
+      "type": "image",
+      "priority": "P1",
+      "status": "ready",
+      "decision": "C04 已确认：四只全要，2D 动画风，禁止 3D 建模",
+      "expect": "四只各自造型与配色，水墨勾线 + 淡彩 + 留白，Q 感不幼稚",
+      "naming": "{zhulong,jingwei,bifang,lushu}.source.jpg（用户原图）｜运行时同名 .webp",
+      "specHint": "2D 水彩淡彩，青绿 / 朱砂 / 鹅黄 / 墨青；四兽一律 2D 动画风，禁止 3D 建模与 Lux3D",
+      "consumedBy": [
+        {
+          "file": "src/ui/BeastBar.vue",
+          "target": "四兽职能按钮图标（昼夜 / 加载 / 引导 / 归位）"
+        },
+        {
+          "file": "src/ui/GuideShimei.vue",
+          "target": "毕方伴飞光点"
+        },
+        {
+          "file": "src/ui/CompassMap.vue",
+          "target": "鹿蜀守空卡槽"
+        },
+        {
+          "file": "src/ui/StaticFallback.vue",
+          "target": "烛龙天际远景（2D 降级）"
+        },
+        {
+          "file": "src/ui/CharacterImage.vue",
+          "target": "资产统一入口 / 兜底"
+        },
+        {
+          "file": "tools/images/prepare_characters.py",
+          "target": "四图统一去棋盘格 → 透明 WebP"
+        }
+      ],
+      "provided": [
+        {
+          "file": "lushu.source.jpg",
+          "beast": "鹿蜀",
+          "trait": "白身虎纹赤鬃小马，守空卡槽 / 归位"
+        },
+        {
+          "file": "jingwei.source.jpg",
+          "beast": "精卫",
+          "trait": "白喙赤足胖鸟，衔石落定 = 场景加载"
+        },
+        {
+          "file": "bifang.source.jpg",
+          "beast": "毕方",
+          "trait": "一足青质白鹤，伴飞引导动线"
+        },
+        {
+          "file": "zhulong.source.jpg",
+          "beast": "烛龙",
+          "trait": "青鳞金角小龙，睁眼 = 昼夜切换；2D 降级作天际远景"
+        }
+      ],
+      "beastNote": "用户给出 4 张未标注名称，按《山海经》特征对应：马身虎纹赤鬃=鹿蜀、白喙赤足=精卫、一足青质鹤形=毕方、青龙金角=烛龙。若原意不同，只改文件名与 beast 字段即可，组件按 name 取图。",
+      "runtimeAssets": [
+        "public/assets/characters/lushu.webp",
+        "public/assets/characters/jingwei.webp",
+        "public/assets/characters/bifang.webp",
+        "public/assets/characters/zhulong.webp"
+      ],
+      "knownLimit": "毕方白身与原图白底几乎同色，去底后在深色底上略透；因此只在浅米纸控件与带柔光的伴飞位使用。若后续能拿到真透明 PNG 源图，重跑脚本即可消除。"
+    },
+    {
+      "id": "V09",
+      "dir": "V09_scroll_layout",
+      "title": "卷轴内页版式",
+      "type": "image",
+      "priority": "P1",
+      "status": "pending",
+      "expect": "古籍 / 卷轴 / 长图排版参考，2-3 张",
+      "naming": "scroll-01.jpg ...",
+      "specHint": "标注栅格与留白比例更佳",
+      "consumedBy": [
+        {
+          "file": "src/ui/scroll/ScrollPage.vue",
+          "target": "栅格 / 字体层级 / 段落间距",
+          "note": "所有殿阁内页共用"
+        },
+        {
+          "file": "src/styles/scroll.css",
+          "target": "--scroll-gutter / --scroll-line",
+          "note": ""
+        },
+        {
+          "file": "src/ui/scroll/ScrollHeader.vue",
+          "target": "页眉小印位置",
+          "note": "与 V10 呼应"
+        }
+      ]
+    },
+    {
+      "id": "V10",
+      "dir": "V10_seal_signature",
+      "title": "落款「颜如玉」与朱砂印",
+      "type": "image",
+      "priority": "P1",
+      "status": "pending",
+      "expect": "字体偏好、印章形制参考；如有手写落款可直接给图",
+      "naming": "seal.svg, signature.png",
+      "specHint": "单色、可缩放；全站唯一明确见「颜」字之处",
+      "consumedBy": [
+        {
+          "file": "src/ui/brand/SealStamp.vue",
+          "target": "山门落款 / 页眉小印",
+          "note": "极度抽象版下，印章是文字不是地形"
+        },
+        {
+          "file": "public/favicon.svg",
+          "target": "网站图标",
+          "note": ""
+        },
+        {
+          "file": "public/og-image.png",
+          "target": "分享卡印章图层",
+          "note": "与 V01 背景合成"
+        },
+        {
+          "file": "src/config/site.json",
+          "target": "authorName = 颜如玉",
+          "note": "全站姓名占位统一来源"
+        }
+      ]
+    },
+    {
+      "id": "V11",
+      "dir": "V11_case_stone",
+      "title": "案例石壁（刻红字大石 + HOVER 白雾）",
+      "type": "image",
+      "priority": "P1",
+      "status": "pending",
+      "decision": "C05 已确认方向：石面只刻朱砂案例名，不直接展示 demo；HOVER 起白雾，雾中显静态例图",
+      "expect": "石碑形制、刻字字体、白雾质感、石纹苔痕参考",
+      "naming": "stone-form.jpg, mist-ref.gif, carved-type.jpg",
+      "specHint": "白雾柔边 + 慢速噪波；例图另放 assets/cases/",
+      "consumedBy": [
+        {
+          "file": "src/ui/CaseStone.vue",
+          "target": "石壁几何 / 刻字材质 / hover 与 focus 起雾",
+          "note": "键盘 tabindex=0，Enter 入境，Esc 收雾"
+        },
+        {
+          "file": "src/ui/CaseMist.ts",
+          "target": "雾 shader / CSS 噪波参数",
+          "note": "雾里只放静态例图，不放 iframe"
+        },
+        {
+          "file": "src/config/cases.json",
+          "target": "mistPreview 字段（白雾例图路径）",
+          "note": "见规格书 7.4"
+        },
+        {
+          "file": "src/ui/CaseStoneEmpty.vue",
+          "target": "空卡槽「未启之境」石壁",
+          "note": "只显未点亮符箓"
+        }
+      ]
+    },
+    {
+      "id": "V12",
+      "dir": "V12_mobile_fallback",
+      "title": "竖屏第一人称巡游背景",
+      "type": "image",
+      "priority": "P0",
+      "status": "ready",
+      "expect": "9:16 竖版山海全景：暖米天空 / 青碧主峰 / 月白云海，含 4 座带浅色光晕的亭子；横屏版仍缺",
+      "naming": "shanhai-mood-master.source.jpg（用户原图 1077×1920）｜运行时 public/assets/portrait/shanhai-portrait.webp + -lqip.webp + shanhai-foreground.webp",
+      "specHint": "4 个亭子圆心由朱红像素连通域实测（百分比）：(30.5,24.4) / (87.1,23.1) / (20.1,55.9) / (85.2,65.4)。背景按 object-fit:fill 与落点层同比拉伸，节点才套得住光晕；不要改 cover，否则 x 会漂",
+      "consumedBy": [
+        {
+          "file": "tools/images/prepare_portrait.py",
+          "target": "源图 → 全幅 WebP / 36×64 LQIP / 带 alpha 的云海前景 / 落点标定预览",
+          "note": "可复跑；换图只需覆盖 .source.jpg"
+        },
+        {
+          "file": "src/config/tour.json",
+          "target": "三张图路径 + 8 个落点百分比坐标 + 视差幅度",
+          "note": "4 个落点对齐原图亭子，其余 4 个避开底部操作条"
+        },
+        {
+          "file": "src/ui/portrait/TourStartMap.vue",
+          "target": "进场小地图底图（LQIP 铺底 + 高清覆盖）+ 落点节点",
+          "note": "两步确认防误触；结果写 ?from= 深链"
+        },
+        {
+          "file": "src/ui/portrait/PortraitBackdrop.vue",
+          "target": "M0 第一人称远景 + 云海近景双层视差",
+          "note": "tourWalk 推近、tourLook 环顾；松手视线回中"
+        },
+        {
+          "file": "src/styles/portrait.css",
+          "target": "9:16 画幅、手机预览框、安全区 HUD、44px 热区",
+          "note": "fixed 的卷轴 / 门框在桌面预览时也要收进 390px"
+        },
+        {
+          "file": "src/core/device.ts / src/core/tour.ts",
+          "target": "M0/M1 分流、巡游状态机、低帧率降级不丢进度",
+          "note": "规格书 14.1 / 14.4 / 14.6"
+        },
+        {
+          "file": "src/three/tour/TourSceneRoot.ts",
+          "target": "M1 真 3D 第一人称（可选，默认关闭）",
+          "note": "连续 3s <24fps 自动退回本图 M0"
+        }
+      ],
+      "provided": [
+        {
+          "file": "shanhai-mood-master.source.jpg",
+          "note": "★ 用户原图 1077×1920 / 219 KB，脚本唯一输入"
+        },
+        {
+          "file": "portrait-hotspots-preview.png",
+          "note": "脚本产出的 8 落点标定图，红圈=原图亭子光晕 / 墨圈=云海补点"
+        },
+        {
+          "file": "verify-1-map.png / verify-2-walk.png / verify-3-scroll.png / verify-4-end.png / verify-5-m1.png",
+          "note": "390×844 无头浏览器验收截图：小地图 / 巡游 / 卷轴 / 巡毕 / M1"
+        }
+      ],
+      "runtimeAssets": [
+        "public/assets/portrait/shanhai-portrait.webp",
+        "public/assets/portrait/shanhai-portrait-lqip.webp",
+        "public/assets/portrait/shanhai-foreground.webp"
+      ],
+      "knownLimit": "横屏 9:16 以外的一版未提供（当前用 fill 轻微拉伸适配）；M1 真 3D 仍是程序化低多边形山体与殿阁占位，等 V04 殿阁 glb 到位后才适合设为手机默认（M02 待拍板）。"
+    },
+    {
+      "id": "V13",
+      "dir": "V13_claim_copy",
+      "title": "山门主张文案",
+      "type": "copy",
+      "priority": "P0",
+      "status": "decided",
+      "decision": "C01 已定稿，选 C",
+      "expect": "claim.txt 已写入，无需再提供图",
+      "naming": "claim.txt",
+      "specHint": "如需改文案，改 claim.txt 并同步 site.json",
+      "consumedBy": [
+        {
+          "file": "src/ui/GateHero.vue",
+          "target": "首屏主张文本",
+          "note": "HTML 层渲染，不等 WebGL 初始化"
+        },
+        {
+          "file": "src/config/site.json",
+          "target": "claim 字段",
+          "note": "唯一文案源"
+        },
+        {
+          "file": "public/og-image.png",
+          "target": "分享卡短句",
+          "note": "可截取主张前半句"
+        }
+      ]
+    },
+    {
+      "id": "V14",
+      "dir": "V14_observatory_evidence",
+      "title": "观星台佐证 demo 展示图",
+      "type": "image",
+      "priority": "P2",
+      "status": "pending",
+      "decision": "C08 已确认：先留占位，后续由用户放入对应 demo 展示图",
+      "expect": "每个佐证一张展示图 + 可选 demo 链接，文件名对应 evidenceSlots id",
+      "naming": "evidence-webgpu.jpg, evidence-3d-viz.jpg, evidence-architecture.jpg, evidence-lowcode.jpg",
+      "specHint": "16:9，压缩后 < 300KB/张",
+      "consumedBy": [
+        {
+          "file": "src/config/evidenceSlots.json",
+          "target": "image / demoUrl 字段",
+          "note": "见规格书 9.2，当前全为 reserved"
+        },
+        {
+          "file": "src/ui/ObservatoryGallery.vue",
+          "target": "图片卡槽渲染",
+          "note": "image 为 null 时显示空台基，不显示灰字暂无数据"
+        }
+      ]
+    }
+  ]
+}

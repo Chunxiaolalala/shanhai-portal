@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "_comment": "规格书 14 章数据契约。坐标为竖版背景百分比；spawnPoints.id 必须存在于 pavilions.json。改起点/节奏/文案只动本文件，不改组件。",
+  "backdrop": {
+    "image": "/assets/portrait/shanhai-portrait.webp",
+    "lqip": "/assets/portrait/shanhai-portrait-lqip.webp",
+    "foreground": "/assets/portrait/shanhai-foreground.webp",
+    "focus": [50, 45]
+  },
+  "spawnPoints": [
+    { "id": "shan-men", "x": 48, "y": 74, "hint": "从山门起，按推荐顺序逛完八境" },
+    { "id": "yanan-ge", "x": 20.1, "y": 55.9, "hint": "先看成品，直奔验案阁" },
+    { "id": "tiangong-fang", "x": 85.2, "y": 65.4, "hint": "从提效方案与指标看起" },
+    { "id": "yinke-tai", "x": 30.5, "y": 24.4, "hint": "从获客工具看起" },
+    { "id": "lingshu-dian", "x": 87.1, "y": 23.1, "hint": "从企业级 AGENT 场景看起" },
+    { "id": "guanxing-tai", "x": 50, "y": 36, "hint": "从技术佐证看起" },
+    { "id": "cangjing-ge", "x": 13, "y": 70, "hint": "先看履历" },
+    { "id": "chuanshu-ting", "x": 70, "y": 48, "hint": "直奔传书，聊聊你的场景" }
+  ],
+  "route": {
+    "walkMs": 4200,
+    "arriveMs": 900,
+    "defaultStart": "shan-men",
+    "loop": false,
+    "_comment": "walkMs 一段巡游时长；arriveMs 到站后自动展卷前的站定时间。规格书 M05 的「10s 无操作自动收卷」v1 未启用：到站自动展卷 + 收卷自动续走已保证不会卡住，强行收卷反而打断阅读，待 M05 拍板后再加。"
+  },
+  "camera": {
+    "fov": 72,
+    "eyeHeight": 1.6,
+    "pitchLimit": 35,
+    "yawRange": 35,
+    "walkSpeed": 6.5,
+    "followDistance": 3.2,
+    "_comment": "M1 真 3D 第一人称参数（规格书 14.3）；M0 只消费 look 的视差幅度"
+  },
+  "look": {
+    "maxShiftX": 5.5,
+    "maxShiftY": 3.2,
+    "scaleFrom": 1.04,
+    "scaleTo": 1.2,
+    "_comment": "M0 2.5D 视差：单指拖拽改背景位移百分比，向前走时背景缓慢放大"
+  },
+  "hud": {
+    "selectTitle": "从何处入境",
+    "selectSub": "点一处落脚，再点一次确认 · 或直接随小师妹从山门出发",
+    "confirm": "由此入境",
+    "startDefault": "随小师妹从山门出发",
+    "lookHint": "单指拖动环顾 · 松手继续跟随",
+    "arriveHint": "到了 · 殿门自会展开",
+    "endTitle": "八境已巡完",
+    "endSub": "想再看哪一段？换个起点就能重走。",
+    "restart": "重选起点",
+    "exit": "退出巡游",
+    "backToDesktop": "切到桌面总览"
+  },
+  "performance": {
+    "minFps": 24,
+    "sampleMs": 3000,
+    "maxDpr": 2,
+    "m1Default": false,
+    "_comment": "M02 待用户拍板：手机默认是否跑真 3D。当前 false = 默认 M0 竖版 2.5D；?mode=m1 可强制体验。连续 sampleMs 低于 minFps 自动降 M0 且不丢进度。"
+  }
+}

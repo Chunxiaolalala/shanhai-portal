@@ -1,0 +1,41 @@
+{
+  "terrain": {
+    "seed": 20261111,
+    "segments": 96,
+    "radius": 60,
+    "height": 26
+  },
+  "cameraAnchors": {
+    "overview": [0, 48, 118],
+    "gate": [0, 18, 58],
+    "yanan-ge": [-34, 22, 20],
+    "tiangong-fang": [30, 24, 8],
+    "yinke-tai": [-22, 20, -28],
+    "lingshu-dian": [26, 26, -32],
+    "guanxing-tai": [-5, 36, 11.5],
+    "cangjing-ge": [-40, 16, -48],
+    "chuanshu-ting": [44, 12, 44]
+  },
+  "flight": {
+    "durationMs": [1200, 1800],
+    "curve": "catmullrom"
+  },
+  "cameraApproach": {
+    "outward": 26,
+    "lift": 14,
+    "lookLift": 3,
+    "_comment": "殿阁机位 = 殿阁位置 + 由山心向外的方向 * outward + 抬高 lift；避免把机位写死在每座殿上"
+  },
+  "budget": {
+    "mainBundleKB": 1536,
+    "sceneAssetsMB": 8,
+    "desktopFps": 60,
+    "lowEndFps": 30
+  },
+  "mobile": {
+    "enabled": true,
+    "narrowPx": 820,
+    "preferM1": false,
+    "_comment": "规格书 14 章：粗指针 + 窄屏走竖屏巡游；preferM1 与 tour.json → performance.m1Default 二选一即可，M02 待拍板"
+  }
+}

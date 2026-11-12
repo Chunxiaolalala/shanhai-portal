@@ -1,0 +1,101 @@
+{
+  "_comment": "V06 御剑侠客光标。几何字段由 tools/images/prepare_cursor.py 生成，勿手改；durationMs / hoverScale / trail 可手调。",
+  "frameCount": 8,
+  "cell": 80,
+  "sheetWidth": 640,
+  "hotspot": {
+    "x": 72,
+    "y": 64
+  },
+  "sprite": "swordsman-sheet.png",
+  "static": "swordsman-static.png",
+  "durationMs": 1200,
+  "scale": 0.95,
+  "hoverScale": 1.12,
+  "trail": {
+    "color": "#f2d790",
+    "glow": 18
+  },
+  "frames": [
+    {
+      "file": "swordsman-01.png",
+      "dy": -2.28,
+      "sourceBox": [
+        81,
+        1070,
+        749,
+        1673
+      ]
+    },
+    {
+      "file": "swordsman-02.png",
+      "dy": -2.68,
+      "sourceBox": [
+        707,
+        1049,
+        1443,
+        1677
+      ]
+    },
+    {
+      "file": "swordsman-03.png",
+      "dy": -9.0,
+      "sourceBox": [
+        1451,
+        900,
+        2107,
+        1508
+      ]
+    },
+    {
+      "file": "swordsman-04.png",
+      "dy": -1.77,
+      "sourceBox": [
+        2189,
+        1091,
+        2759,
+        1674
+      ]
+    },
+    {
+      "file": "swordsman-05.png",
+      "dy": 4.19,
+      "sourceBox": [
+        2868,
+        1222,
+        3437,
+        1798
+      ]
+    },
+    {
+      "file": "swordsman-06.png",
+      "dy": 9.0,
+      "sourceBox": [
+        3357,
+        1420,
+        4086,
+        1995
+      ]
+    },
+    {
+      "file": "swordsman-07.png",
+      "dy": -2.8,
+      "sourceBox": [
+        4028,
+        1025,
+        4759,
+        1696
+      ]
+    },
+    {
+      "file": "swordsman-08.png",
+      "dy": 2.02,
+      "sourceBox": [
+        4680,
+        1159,
+        5417,
+        1768
+      ]
+    }
+  ]
+}

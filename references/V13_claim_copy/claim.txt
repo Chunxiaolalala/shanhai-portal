@@ -1,0 +1,10 @@
+你的行业里哪些活能被 AI 接走？我先做给你看，再谈合作。
+
+—— 颜如玉
+
+【定稿信息】
+版本：v2.1 / C01 确认，选 C
+用途：山门首屏主张（HTML 层渲染，不等 WebGL 初始化）
+落款：旁侧「颜如玉」+ 朱砂印，见 V10_seal_signature
+消费位置：src/ui/GateHero.vue、src/config/site.json（claim 字段）、public/og-image.png（可取前半句）
+修改方式：改本文件后同步 src/config/site.json，不要在组件里硬编码

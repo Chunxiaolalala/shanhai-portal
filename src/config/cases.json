@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "id": "case-house-tour",
+      "title": "3D 楼盘房源 · 看房场景拆解",
+      "biz": "地产 / 获客展示",
+      "mode": "iframe",
+      "url": "https://3d-house-tour.app.workbuddy.host/",
+      "cover": "/assets/cases/house-tour.jpg",
+      "mistPreview": "/assets/cases/house-tour-preview.jpg",
+      "breakdown": {
+        "scene": "买房人看不懂平面户型 → 把楼栋、楼层、房源状态变成可旋转可点选的空间信息",
+        "tech": "Three.js 单文件 / 航拍与聚焦双相机 / 状态分色 / 房源抽屉 / 零后端可直接嵌入任意官网",
+        "value": "销售可直接发给客户，不加装软件、不依赖第三方平台"
+      },
+      "tags": ["3D", "获客工具", "WebGL"],
+      "status": "published"
+    },
+    {
+      "id": "case-xhs-game",
+      "title": "治愈小世界 · 小红书小游戏",
+      "biz": "游戏开发 / 互动传播",
+      "mode": "none",
+      "cover": "/assets/cases/xhs-game.jpg",
+      "mistPreview": "/assets/cases/xhs-game.jpg",
+      "tags": ["小游戏", "治愈系", "互动"],
+      "status": "published"
+    },
+    {
+      "id": "slot-standalone-site",
+      "title": "开发独立站",
+      "desc": "品牌 / 门店独立站，从视觉到上线一条龙",
+      "status": "reserved"
+    },
+    {
+      "id": "slot-voice-studio",
+      "title": "VoiceStudio 做 AI 配音",
+      "desc": "短视频旁白、产品讲解、多语种配音工作流",
+      "status": "reserved"
+    },
+    {
+      "id": "slot-mini-game",
+      "title": "小游戏开发",
+      "desc": "轻量互动小游戏，活动拉新与品牌传播",
+      "status": "reserved"
+    },
+    {
+      "id": "slot-agent-01",
+      "title": null,
+      "biz": "AGENT 企业级场景",
+      "status": "reserved"
+    },
+    {
+      "id": "slot-ai-eff-01",
+      "title": null,
+      "biz": "AI 提效场景",
+      "status": "reserved"
+    }
+  ]
+}

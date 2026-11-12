@@ -1,0 +1,8 @@
+{
+  "slots": [
+    { "id": "evidence-01", "label": "WebGPU 电力拓扑 POC", "image": "/assets/cases/webgpu-poc.png", "status": "ready" },
+    { "id": "evidence-02", "label": "大屏三维可视化", "image": null, "status": "reserved" },
+    { "id": "evidence-03", "label": "生成式建模画布", "image": null, "status": "reserved" },
+    { "id": "evidence-04", "label": "待补充", "image": null, "status": "reserved" }
+  ]
+}

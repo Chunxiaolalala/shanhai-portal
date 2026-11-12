@@ -1,0 +1,48 @@
+node_modules/
+dist/
+.vite/
+*.local
+.DS_Store
+*.tsbuildinfo
+
+# 含临时签名 OSS 链接的生成请求记录，不入库
+image-request.json
+/swordsman-cursor-request.json
+/bg-remove-args.json
+references/V06_cursor_swordsman/swordsman-cursor-request.json
+references/V06_cursor_swordsman/bg-remove-args.json
+
+# 工程根目录下的原始素材（已复制到 references/ 对应目录，原件保留不删）
+/mood-master.png.png
+/颜字参考.jpg
+/shenshan-ink-lowpoly-mountain.jpg
+# V06 八帧雪碧图（约 17 MB + 16 MB，已移入 references/V06_cursor_swordsman/；该目录 *.png 亦被下方规则排除）
+/ancient_swordsman_flight_sheet.png
+/ancient_swordsman_flight_sheet_transparent.png
+# V05 / V08 用户原图（已复制为 references/ 下的 *.source.jpg，原件保留不删）
+/1794409*.png
+
+# 26MB 母版体积过大，参考图默认不进版本库；需要共享时手动 git add -f
+references/**/*.png
+references/**/*.jpg
+references/**/*.jpeg
+# 脚本产出的循环预览，非参考图
+references/V06_cursor_swordsman/cursor-loop.gif
+
+# ⚠️ 含签名 OSS 链接（暴露 AccessKeyID），严禁入库
+cangshuge-lux3d-request.json
+image-request-mood-master.json
+
+# 工程根目录新增原始素材（已复制到 public/assets/ 或 references/，原件保留不删）
+/shanhai-mood-master.jpg
+/webGPU个人项目截图.png
+/小红书小游戏截图.png
+/看房示例Demo.jpg
+/藏书阁参考图.jpg
+/cangshuge-lux3d-reference.jpg
+
+# 防御：模型目录里的非 glb 打包件不入库（运行时只需 .glb）
+public/assets/models/*.zip
+
+# 本地工作记忆与项目状态，非源码
+.workbuddy/

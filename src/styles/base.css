@@ -1,0 +1,254 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  /* [REF V06] 御剑侠客 · 静态第 1 帧（原生 cursor 兜底，见 SwordCursor.vue / cursor.css） */
+  cursor: url('../assets/cursor/swordsman-static.png') 72 64, auto;
+}
+
+a {
+  color: var(--cinnabar);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a,
+button {
+  cursor: url('../assets/cursor/swordsman-static.png') 72 64, pointer;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* 键盘可达：焦点样式必须保留，不能 outline: none */
+:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 3px;
+}
+
+.app-shell { position: relative; }
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: var(--stage-height);
+  min-height: 420px;
+  display: block;
+  overflow: hidden;
+  background: var(--moon-soft);
+}
+
+.stage__canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 山门是 HTML 层，同步渲染、不等 WebGL；半透明宣纸卡保证对比度 */
+.gate {
+  position: absolute;
+  top: clamp(1rem, 3vw, 2.2rem);
+  left: clamp(1rem, 3vw, 2.2rem);
+  z-index: 10;
+  width: min(500px, 88vw);
+  padding: clamp(1.2rem, 3vw, 2.2rem);
+  background: linear-gradient(135deg, rgba(248, 243, 226, 0.95), rgba(240, 229, 202, 0.88));
+  border: 1px solid rgba(110, 143, 132, 0.45);
+  border-left: 3px solid var(--cinnabar);
+  border-radius: 3px;
+  box-shadow: 0 14px 42px rgba(51, 65, 60, 0.16);
+  backdrop-filter: blur(6px);
+}
+
+.gate__toggle {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid rgba(110, 143, 132, 0.5);
+  border-radius: 2px;
+  background: rgba(248, 243, 226, 0.7);
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+}
+
+.gate--collapsed {
+  width: min(420px, 90vw);
+  padding: 0.85rem 1rem;
+}
+
+.gate--collapsed .gate__toggle { position: static; float: right; margin-left: 0.6rem; }
+.gate__mini { margin: 0; font-family: var(--font-serif); font-size: 0.88rem; color: var(--ink); }
+
+.gate__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  color: var(--ink-soft);
+}
+
+.gate__claim {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 3.2vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.gate__tagline {
+  margin: 1rem 0 0;
+  max-width: 46rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.gate__signature {
+  margin: 1rem 0 0;
+  font-family: var(--font-serif);
+  color: var(--cinnabar);
+}
+
+.gate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.gate__cta {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--cinnabar);
+  border-radius: 2px;
+  background: var(--cinnabar);
+  color: var(--moon);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.gate__cta--proof {
+  background: transparent;
+  color: var(--cinnabar);
+}
+
+.gate__cta--proof:hover { background: rgba(168, 55, 42, 0.08); }
+
+.gate__cta--pending {
+  background: transparent;
+  color: var(--ink-soft);
+  border-style: dashed;
+}
+
+/* 纯文字索引：给赶时间的人的直梯，任何降级路径下都在 */
+.text-index {
+  position: relative;
+  z-index: 2;
+  padding: 3rem clamp(1.5rem, 5vw, 4rem) 5rem;
+  background: var(--paper);
+  border-top: 1px solid rgba(110, 143, 132, 0.4);
+}
+
+.text-index__head { display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap; }
+
+.text-index h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.text-index__head p { margin: 0; font-size: 0.84rem; color: var(--ink-soft); }
+
+.text-index ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.6rem;
+  margin: 1.4rem 0 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.text-index li button {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgba(110, 143, 132, 0.42);
+  border-radius: 2px;
+  background: rgba(248, 243, 226, 0.6);
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.text-index li button:hover {
+  border-color: var(--cinnabar);
+  background: rgba(248, 243, 226, 0.95);
+}
+
+.text-index__no { color: var(--cinnabar); font-family: var(--font-serif); font-size: 0.85rem; }
+.text-index__name { font-family: var(--font-serif); font-size: 1rem; }
+.text-index__role { font-size: 0.72rem; color: var(--ink-soft); }
+.text-index__contact { margin: 0; font-size: 0.86rem; }
+
+/* 2D 降级路径：山门改顶部通栏，避免浮动卡片盖住左侧殿阁热区 */
+.app-shell--static .gate {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 1.2rem clamp(1.2rem, 5vw, 4rem) 1.4rem;
+  border-left: 0;
+  border-top: 3px solid var(--cinnabar);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.app-shell--static .gate__claim { font-size: clamp(1.3rem, 2.6vw, 2rem); }
+.app-shell--static .gate__tagline { margin-top: 0.6rem; }
+.app-shell--static .gate__signature { margin-top: 0.6rem; }
+.app-shell--static .gate__actions { margin-top: 0.9rem; }
+.app-shell--static .stage { height: min(66dvh, 600px); }
+.app-shell--static .gate--collapsed { padding: 0.85rem clamp(1.2rem, 5vw, 4rem); }
+
+@media (max-width: 720px) {
+  .gate { position: relative; top: 0; left: 0; width: 100%; margin: 0; border-left: 0; border-top: 3px solid var(--cinnabar); border-radius: 0; box-shadow: none; }
+  .text-index li button { grid-template-columns: 2rem 1fr; }
+  .text-index__role { grid-column: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

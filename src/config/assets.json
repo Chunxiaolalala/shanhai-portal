@@ -1,0 +1,6 @@
+{
+  "_comment": "Lux3D 单件资产清单。只登记产物路径，不登记生成过程；上线前需减面到单体 <= 3 万面 + 烘焙法线 + KTX2。",
+  "budgetMB": 8,
+  "maxFacesPerAsset": 30000,
+  "items": []
+}

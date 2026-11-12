@@ -1,0 +1,362 @@
+/* 氛围层：门框遮罩 / HTML 殿阁标签 / 小师妹 / 罗盘 / 四兽控制条 / 2D 降级
+ * 全部 2D 叠层，不参与 3D 渲染预算（规格书 06、10 章） */
+
+/* ---------------------------------------------------------------- 门框遮罩转场 */
+.gate-mask { position: fixed; inset: 0; z-index: 30; pointer-events: none; }
+
+.gate-mask__door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  background:
+    linear-gradient(90deg, rgba(95, 72, 54, 0.94), rgba(122, 94, 68, 0.94)),
+    #6b513c;
+  box-shadow: inset 0 0 60px rgba(30, 22, 16, 0.5);
+  animation: door-close 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.gate-mask__door--left { left: 0; transform-origin: left; border-right: 3px solid #a8372a; }
+.gate-mask__door--right { right: 0; transform-origin: right; border-left: 3px solid #a8372a; }
+
+@keyframes door-close {
+  from { transform: scaleX(0.02); opacity: 0.4; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+.gate-mask__ink {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(51, 65, 60, 0) 30%, rgba(51, 65, 60, 0.55) 100%);
+  animation: ink-bloom 0.5s ease-out both;
+}
+
+@keyframes ink-bloom { from { opacity: 0; transform: scale(1.4); } to { opacity: 1; transform: scale(1); } }
+.mask-leave-active .gate-mask__door { animation: door-close 0.3s ease-in reverse both; }
+.mask-leave-active .gate-mask__ink { transition: opacity 0.3s; opacity: 0; }
+
+/* ---------------------------------------------------------------- 殿阁 HTML 标签 */
+.labels { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+
+.labels__item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transform: translate(-50%, -50%);
+  padding: 0.25rem 0.6rem 0.25rem 0.4rem;
+  border: 1px solid rgba(110, 143, 132, 0.55);
+  border-radius: 999px;
+  background: rgba(248, 243, 226, 0.88);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  pointer-events: auto;
+  backdrop-filter: blur(2px);
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+
+.labels__item:hover, .labels__item--active {
+  background: #f8f3e2;
+  border-color: var(--cinnabar);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.labels__mark {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--jade-deep);
+}
+
+.labels__item--guided .labels__mark,
+.labels__item--active .labels__mark { background: var(--cinnabar); }
+
+.labels__item--guided { border-color: var(--cinnabar); box-shadow: 0 0 0 3px rgba(168, 55, 42, 0.12); }
+
+/* ---------------------------------------------------------------- 角色资产 [REF V05][REF V08] */
+.character {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  line-height: 0;
+  isolation: isolate;
+}
+
+.character > img,
+.character__fallback {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.character__fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cinnabar);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* 月白柔光：承托水彩白身，叠在青碧山体上不会显空 */
+.character--glow::before {
+  content: '';
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(253, 252, 242, 0.74) 0%,
+    rgba(253, 252, 242, 0.3) 50%,
+    rgba(253, 252, 242, 0) 72%);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- 小师妹 */
+.shimei {
+  position: absolute;
+  z-index: 8;
+  width: 96px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 1.5s cubic-bezier(0.34, 0.1, 0.25, 1), top 1.5s cubic-bezier(0.34, 0.1, 0.25, 1), opacity 0.4s;
+}
+
+.shimei--hidden { opacity: 0; }
+
+.shimei--docked {
+  left: 1.6rem !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: 3.6rem;
+  opacity: 0.78;
+  transform: scale(0.72);
+}
+
+.shimei__body { position: relative; animation: shimei-sway 3.2s ease-in-out infinite; }
+
+.shimei__body::before {
+  content: '';
+  position: absolute;
+  inset: -4% 0 4%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 55%,
+    rgba(253, 252, 242, 0.66) 0%,
+    rgba(242, 215, 144, 0.16) 42%,
+    rgba(253, 252, 242, 0) 70%);
+  pointer-events: none;
+}
+
+.shimei__figure {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 96px;
+  height: 96px;
+  filter: drop-shadow(0 4px 8px rgba(61, 77, 66, 0.24));
+}
+
+.shimei__bifang {
+  position: absolute;
+  z-index: 2;
+  top: -20px;
+  right: -30px;
+  width: 54px;
+  height: 54px;
+  animation: bifang-flap 1.4s ease-in-out infinite;
+}
+
+/* 气泡放角色上方：放下方会和殿阁名称标签叠在一起 */
+.shimei__tip {
+  position: absolute;
+  top: -1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.1rem 0.45rem;
+  border: 1px solid rgba(168, 55, 42, 0.5);
+  border-radius: 999px;
+  background: rgba(248, 243, 226, 0.9);
+  color: var(--cinnabar);
+  font-size: 0.64rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@keyframes shimei-sway {
+  0%, 100% { transform: rotate(-5deg) translateY(0); }
+  50% { transform: rotate(5deg) translateY(-4px); }
+}
+
+@keyframes bifang-flap {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-4px) scaleY(0.72); }
+}
+
+/* ---------------------------------------------------------------- 罗盘 */
+.compass {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 3.6rem;
+  z-index: 7;
+  width: 168px;
+  padding: 0.6rem;
+  background: rgba(248, 243, 226, 0.8);
+  border: 1px solid rgba(110, 143, 132, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.compass__dial { display: block; width: 100%; }
+/* [REF V06] 罗盘节点是 SVG <g>，单独补一份原生静态光标兜底 */
+.compass__node { cursor: url('../assets/cursor/swordsman-static.png') 72 64, pointer; }
+.compass__node:hover circle { stroke: var(--cinnabar); stroke-width: 2.2; }
+.compass__node:focus-visible { outline: none; }
+.compass__node:focus-visible circle { stroke: var(--cinnabar); stroke-width: 3; }
+
+.compass__buttons { display: none; }
+
+.compass__lushu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  margin: 0.2rem 0 0;
+  text-align: center;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.compass__lushu span { color: var(--cinnabar); }
+.compass__beast { width: 26px; height: 26px; }
+
+.compass__pulse { animation: compass-pulse 1.8s ease-in-out infinite; }
+@keyframes compass-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+/* 罗盘节点本身不可点（SVG 无语义），下面这组按钮是键盘可达的等价入口 */
+@media (hover: none), (max-width: 720px) {
+  .compass__dial { display: none; }
+  .compass__buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.2rem; }
+  .compass { width: min(320px, 92vw); right: 0.6rem; bottom: 3.4rem; }
+  .compass__buttons button {
+    padding: 0.2rem 0.1rem;
+    border: 1px solid rgba(110, 143, 132, 0.4);
+    background: transparent;
+    font-size: 0.66rem;
+    cursor: pointer;
+  }
+  .compass__buttons .compass__btn--active { border-color: var(--cinnabar); color: var(--cinnabar); }
+}
+
+/* ---------------------------------------------------------------- 四兽控制条 */
+.beastbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem clamp(1rem, 4vw, 2.5rem);
+  background: linear-gradient(0deg, rgba(240, 229, 202, 0.94), rgba(240, 229, 202, 0));
+  font-size: 0.76rem;
+}
+
+.beastbar__backend { margin: 0; color: var(--ink-soft); }
+.beastbar__actions { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; justify-content: flex-end; }
+
+.beastbar__actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.12rem;
+  padding: 0.18rem 0.6rem 0.18rem 0.32rem;
+  border: 1px solid rgba(110, 143, 132, 0.6);
+  border-radius: 2px;
+  background: rgba(248, 243, 226, 0.8);
+  color: var(--ink);
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.beastbar__actions button:hover { border-color: var(--cinnabar); }
+.beastbar__icon { width: 24px; height: 24px; }
+
+.beastbar__jingwei { display: inline-flex; align-items: center; gap: 0.25rem; color: var(--jade-deep); }
+.beastbar__jingwei .beastbar__icon { width: 28px; height: 28px; animation: jingwei 1.2s ease-in-out infinite; }
+@keyframes jingwei { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+/* ---------------------------------------------------------------- 2D 静态降级 */
+.fallback { position: absolute; inset: 0; overflow: hidden; }
+.fallback__art { display: block; width: 100%; height: 100%; }
+
+/* 烛龙盘在天际，淡到只作气息，不抢殿名热区 */
+.fallback__zhulong {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  width: min(210px, 22vw);
+  height: min(210px, 22vw);
+  opacity: 0.24;
+  filter: saturate(0.8);
+  pointer-events: none;
+}
+
+.fallback__hotspot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transform: translate(-50%, -50%);
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(110, 143, 132, 0.6);
+  border-radius: 999px;
+  background: rgba(248, 243, 226, 0.9);
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.fallback__hotspot:hover { border-color: var(--cinnabar); }
+.fallback__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cinnabar); }
+.fallback__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 4.6rem;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+}
+
+/* 烛龙夜间：只影响舞台，不影响卷轴与正文的可读性 */
+[data-time='night'] .stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(38, 58, 66, 0.28), rgba(38, 58, 66, 0.06));
+}
+
+@media (max-width: 720px) {
+  .beastbar { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+  .beastbar__backend { display: none; }
+  .labels__item { font-size: 0.68rem; padding: 0.15rem 0.4rem; }
+  .shimei--docked { bottom: 3.4rem; left: 0.6rem !important; }
+  .fallback__name { font-size: 0.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimei { transition: none; }
+  .shimei__body, .shimei__bifang, .beastbar__jingwei .beastbar__icon, .compass__pulse { animation: none; }
+  .gate-mask { display: none; }
+}

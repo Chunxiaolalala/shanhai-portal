@@ -1,0 +1,25 @@
+{
+  "tools": [
+    {
+      "id": "tool-panorama-guide",
+      "title": "全景样板间智能讲解",
+      "desc": "按停留位置自动讲户型、朝向、采光、用材",
+      "value": "客户看得懂、愿意留资，销售少跑一趟",
+      "status": "concept"
+    },
+    {
+      "id": "tool-style-preview",
+      "title": "装修风格预览",
+      "desc": "上传户型或毛坯照，切换风格即时出效果",
+      "value": "装企 / 家居门店的留资钩子",
+      "status": "concept"
+    },
+    {
+      "id": "tool-3d-measure",
+      "title": "3D 捕捉测距",
+      "desc": "浏览器里点两下出尺寸，生成可分享的量尺结果",
+      "value": "售前省一次上门，适合装修 / 展陈 / 设备摆放",
+      "status": "concept"
+    }
+  ]
+}

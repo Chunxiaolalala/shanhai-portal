@@ -1,0 +1,18 @@
+{
+  "_comment": "[REF V04] Lux3D 图生 3D 输入清单。等 references/V04_pavilion_arch/ 放入真实古建单体正交/三分之四视角图后，把 status 改成 ready 并填 input 数组。整座山海地形不交给 Lux3D（需可控、可摆位）。",
+  "status": "pending",
+  "referenceDir": "references/V04_pavilion_arch",
+  "mode": "image-to-3d",
+  "options": {
+    "exportFaces": "300K",
+    "pbr": true
+  },
+  "pipeline": [
+    "参考图 → Turbo 筛形",
+    "Standard 重跑中选件",
+    "Blender 修背面 / 减面 / 去塑料感",
+    "gltf-transform + KTX2 压缩",
+    "登记进 src/config/assets.json"
+  ],
+  "input": []
+}
