@@ -23,21 +23,42 @@ import type {
   TourSpawnPoint,
 } from '@/types/contract'
 
+/**
+ * [FIX Pages] 配置里的 /assets/ 绝对路径在 base:'./' 的 GitHub Pages 子路径部署下会 404
+ * （线上地址是 /shanhai-portal/，但 /assets/ 会请求到域名根）。统一改写为带
+ * import.meta.env.BASE_URL 前缀的相对路径（如 './assets/...'），本地 base:'/' 时退化为 '/assets/...'。
+ */
+function rewriteAssetPaths(value: unknown): unknown {
+  const base = import.meta.env.BASE_URL
+  if (typeof value === 'string') {
+    return value.startsWith('/assets/') ? base + value.slice(1) : value
+  }
+  if (Array.isArray(value)) return value.map(rewriteAssetPaths)
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const key of Object.keys(value)) {
+      out[key] = rewriteAssetPaths((value as Record<string, unknown>)[key])
+    }
+    return out
+  }
+  return value
+}
+
 export const site = siteJson as SiteConfig
 export const scene = sceneJson as SceneConfig
 /** [REF V06] 御剑侠客序列帧：几何字段由 tools/images/prepare_cursor.py 生成 */
 export const cursor = cursorJson as CursorConfig
 /** [CH14][REF V12] 竖屏巡游：落点 / 节奏 / 镜头 / HUD 文案 / 性能阈值的唯一来源 */
-export const tour = tourJson as TourConfig
+export const tour = rewriteAssetPaths(tourJson) as TourConfig
 
 /** 按 order 升序；所有导航、罗盘、引导都消费这一份排序结果 */
 export const pavilions: Pavilion[] = [...(pavilionsJson.pavilions as Pavilion[])].sort(
   (a, b) => a.order - b.order,
 )
 
-export const cases: CaseItem[] = casesJson.cases as CaseItem[]
+export const cases: CaseItem[] = rewriteAssetPaths(casesJson.cases) as CaseItem[]
 export const tools: ConceptTool[] = toolsJson.tools as ConceptTool[]
-export const evidenceSlots: EvidenceSlot[] = evidenceJson.slots as EvidenceSlot[]
+export const evidenceSlots: EvidenceSlot[] = rewriteAssetPaths(evidenceJson.slots) as EvidenceSlot[]
 
 /** 邮箱占位未替换时，组件应渲染提示而不是一个坏掉的 mailto 链接 */
 export function isMailConfigured(): boolean {

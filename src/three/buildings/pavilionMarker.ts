@@ -210,7 +210,7 @@ export function createPavilionMarkers(heightAt: (x: number, z: number) => number
 
     // 若有 Lux3D glb，异步加载并替换占位；加载期间与失败都保留占位几何
     if (pavilion.model !== undefined) {
-      loadPavilionModel(`/assets/models/${pavilion.model}`, MODEL_TARGET_SIZE)
+      loadPavilionModel(`${import.meta.env.BASE_URL}assets/models/${pavilion.model}`, MODEL_TARGET_SIZE)
         .then(({ group: modelGroup, dispose: disposeModel }) => {
           if (disposed) {
             disposeModel()
